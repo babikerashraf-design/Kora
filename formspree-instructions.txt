@@ -1,0 +1,65 @@
+HOW TO CONNECT THE CONTACT FORM TO FORMSPREE
+==============================================
+
+WHAT NEEDS TO CHANGE IN THE HTML
+---------------------------------
+Just one thing: the placeholder web address in the form's "action" line.
+
+Open index.html and find this line (search for "formspree"):
+
+    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+
+Replace YOUR_FORM_ID with your real Formspree endpoint ID once you have
+one (see steps below). Nothing else in the file needs to change.
+
+Example — if Formspree gives you the ID "abcd1234", the line becomes:
+
+    <form action="https://formspree.io/f/abcd1234" method="POST">
+
+That's it. Save the file and the form is live.
+
+
+STEPS TO GET YOUR FORMSPREE ID
+--------------------------------
+1. Go to https://formspree.io and click "Get Started" / "Sign Up".
+   Free plan needs no card, just an email address.
+
+2. Once logged in, click "New Form".
+
+3. Give it a name (e.g. "KSYC Contact Form") and set the email address
+   where you want submissions sent — this can be any inbox you check.
+
+4. Formspree will show you an endpoint URL that looks like:
+       https://formspree.io/f/abcd1234
+   Copy the part after "/f/" — that's your Form ID.
+
+5. Paste that ID into index.html as shown above.
+
+6. Formspree will ask you to verify the form with a test submission the
+   first time — just fill in the live contact form on your site once
+   after publishing, and confirm the verification email Formspree sends.
+
+
+THINGS TO KNOW
+-----------------
+- Free plan: up to 50 form submissions per month. Fine for a small
+  community site; upgrade only if you outgrow it.
+
+- Replies: the form already sends the visitor's typed email address to
+  Formspree as the "email" field, so when you get the notification
+  email, hitting Reply goes straight back to them — no extra setup.
+
+- Spam protection: there's a hidden "honeypot" field already built into
+  the form (invisible to real visitors). Formspree automatically
+  discards any submission where it's been filled in, which is a common
+  sign of a spam bot. No action needed on your part.
+
+- Subject line: submissions arrive with the subject "New enquiry from
+  Kingston Sudanese Youth Club website" already set, so they're easy to
+  spot in your inbox.
+
+- Optional upgrade later: by default, after someone submits the form
+  they're redirected to a generic Formspree "thank you" page. If you'd
+  rather they land back on your own site with a custom thank-you
+  message, that needs one small addition (a hidden "_next" field) —
+  just ask and it can be added once you're ready.

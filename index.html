@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Kingston Sudanese Youth Club | Community Football Project</title>
+<meta name="description" content="Kingston Sudanese Youth Club is a community organisation using football to build confidence, teamwork and opportunity for children.">
+
+<!-- Bootstrap 5 (grid, utilities, form + nav base) -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap Icons (professional, free icon set) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<!-- Fonts: Anton (condensed display / jersey energy) + Inter (clean body) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --pitch:#173B2C;      /* deep pitch green */
+    --pitch-dark:#0E271E; /* near-black green for text/footer */
+    --gold:#E8A33D;       /* sun / kit trim gold */
+    --clay:#C1502E;       /* earth clay - sparing accent */
+    --bone:#F7F5EF;       /* warm off-white background */
+    --ink:#16221C;        /* body text */
+    --line:rgba(23,59,44,0.14);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--ink);
+    background:var(--bone);
+    margin:0;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3, .display-font{
+    font-family:'Anton', 'Inter', sans-serif;
+    font-weight:400;
+    letter-spacing:.02em;
+    text-transform:uppercase;
+    line-height:1.05;
+  }
+
+  a{text-decoration:none;}
+  .text-clay{color:var(--clay);}
+  .bg-pitch{background:var(--pitch);}
+  .bg-pitch-dark{background:var(--pitch-dark);}
+
+  /* ===== Navbar ===== */
+  .site-nav{
+    background:#fff;
+    border-bottom:1px solid var(--line);
+    padding:1rem 0;
+    padding-top:calc(1rem + env(safe-area-inset-top, 0px));
+    position:-webkit-sticky;
+    position:sticky;
+    top:0;
+    z-index:1030;
+  }
+  section[id], header[id]{ scroll-margin-top: 100px; }
+  .site-nav .navbar-brand{
+    font-family:'Anton', sans-serif;
+    font-size:1.1rem;
+    letter-spacing:.02em;
+    color:var(--pitch-dark);
+    text-transform:uppercase;
+    display:flex;
+    align-items:center;
+    gap:.65rem;
+    max-width:280px;
+    line-height:1.15;
+  }
+  .site-nav .brand-logo{
+    height:50px;
+    width:auto;
+    flex-shrink:0;
+  }
+  .site-nav .nav-link{
+    font-weight:600;
+    font-size:.92rem;
+    color:var(--ink);
+    text-transform:uppercase;
+    letter-spacing:.03em;
+    padding:.5rem 1rem !important;
+    transition:color .15s ease;
+  }
+  .site-nav .nav-link:hover{color:var(--clay);}
+  .btn-jersey{
+    background:var(--clay);
+    color:#fff;
+    font-weight:700;
+    font-size:.85rem;
+    text-transform:uppercase;
+    letter-spacing:.03em;
+    padding:.55rem 1.3rem;
+    border-radius:2px;
+    border:none;
+    transition:background .15s ease, transform .15s ease;
+  }
+  .btn-jersey:hover{background:#a3421f; color:#fff; transform:translateY(-1px);}
+
+  /* ===== Hero (split layout) ===== */
+  .hero{
+    position:relative;
+    background:var(--pitch-dark);
+    color:#fff;
+  }
+  .hero-split{
+    display:flex;
+    flex-direction:row;
+    min-height:70vh;
+    min-height:70svh;
+  }
+  .hero-left{
+    flex:0 0 35%;
+    display:flex;
+    align-items:center;
+    background:linear-gradient(135deg, #07702D 0%, #1C5E4A 100%);
+    padding:3rem 3.5rem;
+  }
+  .hero-left-inner{max-width:480px;}
+  .hero-right{
+    flex:0 0 65%;
+    position:relative;
+    overflow:hidden;
+    min-height:320px;
+  }
+  .hero-right img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  .hero-eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:.5rem;
+    background:rgba(232,163,61,.15);
+    border:1px solid var(--gold);
+    color:var(--gold);
+    font-weight:700;
+    font-size:.75rem;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    padding:.4rem .9rem;
+    border-radius:20px;
+    margin-bottom:1.25rem;
+  }
+  .hero h1{
+    font-size:clamp(2.2rem, 4vw, 3.4rem);
+    max-width:14ch;
+    margin-bottom:1rem;
+  }
+  .hero h1 span{color:#CA0405;}
+  .hero p.lead{
+    max-width:46ch;
+    font-size:1.1rem;
+    color:rgba(255,255,255,.88);
+    margin-bottom:2rem;
+  }
+
+  /* ===== Scoreboard stat strip (signature element) ===== */
+  .scoreboard{
+    background:#07702D;
+    border-top:1px solid rgba(255,255,255,.08);
+  }
+  .scoreboard .stat{
+    padding:1.6rem 1rem;
+    text-align:center;
+    border-left:1px solid rgba(255,255,255,.08);
+  }
+  .scoreboard .stat:first-child{border-left:none;}
+  .scoreboard .stat .num{
+    font-family:'Anton', sans-serif;
+    font-size:2.4rem;
+    color:#fff;
+    line-height:1;
+  }
+  .scoreboard .stat .lbl{
+    font-size:.78rem;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:rgba(255,255,255,.7);
+    margin-top:.4rem;
+  }
+
+  /* ===== Section furniture ===== */
+  section{padding:3.5rem 0;}
+  .section-tag{
+    font-family:'Anton', sans-serif;
+    font-size:.85rem;
+    color:#CA0405;
+    letter-spacing:.08em;
+    margin-bottom:.6rem;
+    display:block;
+  }
+  .section-title{
+    font-size:clamp(1.9rem, 3.4vw, 2.6rem);
+    color:var(--pitch-dark);
+    margin-bottom:1.1rem;
+  }
+  .section-lead{
+    color:#4b5750;
+    font-size:1.05rem;
+    max-width:60ch;
+  }
+
+  /* ===== About ===== */
+  #about{background:#fff;}
+  .about-photo{
+    position:relative;
+    border-radius:6px;
+    overflow:hidden;
+    aspect-ratio:4/5;
+  }
+  .about-photo img{width:100%; height:100%; object-fit:cover; display:block;}
+  .about-photo::after{
+    content:"";
+    position:absolute; inset:0;
+    box-shadow:inset 0 0 0 6px rgba(247,245,239,.9);
+  }
+  .badge-founded{
+    position:absolute;
+    bottom:-1.2rem;
+    right:-1.2rem;
+    background:#052084;
+    color:#fff;
+    width:110px;
+    height:110px;
+    border-radius:50%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    font-family:'Anton', sans-serif;
+    box-shadow:0 8px 20px rgba(0,0,0,.18);
+  }
+  .badge-founded .yr{font-size:1.4rem; line-height:1;}
+  .badge-founded .txt{font-size:.6rem; letter-spacing:.05em; text-transform:uppercase; margin-top:.2rem;}
+
+  .value-row{
+    display:flex;
+    gap:1rem;
+    padding:1rem 0;
+    border-top:1px solid var(--line);
+  }
+  .value-row:last-child{border-bottom:1px solid var(--line);}
+  .value-row .bi{font-size:1.3rem; color:var(--pitch); margin-top:.15rem;}
+  .value-row h3{
+    font-family:'Inter'; text-transform:none; font-weight:700;
+    font-size:1rem; letter-spacing:0; margin-bottom:.15rem; color:var(--pitch-dark);
+  }
+  .value-row p{font-size:.92rem; color:#5c665f; margin:0;}
+
+  /* ===== Programs / gallery ===== */
+  #programs{background:var(--bone);}
+  .prog-card{
+    background:#fff;
+    border-radius:6px;
+    overflow:hidden;
+    border:1px solid var(--line);
+    height:100%;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .prog-card:hover{transform:translateY(-4px); box-shadow:0 14px 30px rgba(23,59,44,.12);}
+  .prog-photo{aspect-ratio:4/3; overflow:hidden; position:relative;}
+  .prog-photo img{width:100%; height:100%; object-fit:cover; display:block;}
+  .prog-num{
+    position:absolute; top:.8rem; left:.8rem;
+    background:#010103;
+    color:#fff;
+    font-family:'Anton', sans-serif;
+    font-size:.9rem;
+    padding:.2rem .55rem;
+    border-radius:3px;
+  }
+  .prog-body{padding:1.2rem 1.3rem 1.4rem;}
+  .prog-body h3{
+    font-family:'Anton'; font-size:1.1rem; text-transform:uppercase;
+    color:var(--pitch-dark); margin-bottom:.4rem;
+  }
+  .prog-body p{font-size:.92rem; color:#5c665f; margin:0;}
+
+  /* ===== Social strip ===== */
+  #social{background:#07702D; color:#fff; text-align:center;}
+  #social h2{color:#fff;}
+  #social p{color:rgba(255,255,255,.75); max-width:50ch; margin:0 auto 2rem;}
+  .social-links{display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;}
+  .social-links a{
+    width:52px; height:52px;
+    display:flex; align-items:center; justify-content:center;
+    border:1px solid rgba(255,255,255,.3);
+    border-radius:50%;
+    color:#fff;
+    font-size:1.3rem;
+    transition:background .15s ease, border-color .15s ease, transform .15s ease;
+  }
+  .social-links a:hover{background:#CA0405; border-color:#CA0405; color:#fff; transform:translateY(-3px);}
+
+  /* ===== Contact ===== */
+  #contact{background:#fff;}
+  .contact-info-card{
+    background:var(--bone);
+    border-radius:6px;
+    padding:2rem;
+    height:100%;
+  }
+  .info-line{display:flex; gap:.9rem; margin-bottom:1.3rem;}
+  .info-line .bi{
+    font-size:1.1rem; color:var(--pitch-dark);
+    background:#fff; border:1px solid var(--line);
+    width:40px; height:40px; min-width:40px;
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+  }
+  .info-line strong{display:block; font-size:.92rem; color:var(--pitch-dark);}
+  .info-line span{font-size:.9rem; color:#5c665f;}
+
+  .form-control{
+    border-radius:4px;
+    border:1px solid var(--line);
+    padding:.7rem .9rem;
+    font-size:.95rem;
+  }
+  .form-control:focus{
+    border-color:var(--pitch);
+    box-shadow:0 0 0 .2rem rgba(23,59,44,.12);
+  }
+  label.form-label{
+    font-size:.82rem; font-weight:600; text-transform:uppercase;
+    letter-spacing:.03em; color:var(--pitch-dark); margin-bottom:.35rem;
+  }
+
+  .map-wrap{
+    border-radius:6px;
+    overflow:hidden;
+    border:1px solid var(--line);
+    height:100%;
+    min-height:320px;
+  }
+  .map-wrap iframe{width:100%; height:100%; min-height:320px; border:0; display:block; filter:grayscale(15%);}
+
+  /* ===== Footer ===== */
+  footer{background:#010103; color:rgba(255,255,255,.65); padding:2.2rem 0;}
+  footer .brand{color:#fff; font-family:'Anton'; letter-spacing:.03em;}
+  footer a{color:rgba(255,255,255,.65);}
+  footer a:hover{color:#CA0405;}
+
+  @media (max-width:1199.98px) and (min-width:768px){
+    .hero-left{padding:2.5rem 2rem;}
+  }
+
+  @media (max-width:767.98px){
+    section{padding:3.5rem 0;}
+    .badge-founded{width:88px; height:88px; right:.5rem; bottom:-1rem;}
+    .scoreboard .stat{border-left:none; border-top:1px solid rgba(255,255,255,.08);}
+    .scoreboard .stat:first-child{border-top:none;}
+    .hero-split{flex-direction:column; min-height:auto;}
+    .hero-left{order:1; padding:2.75rem 1.5rem 2.25rem;}
+    .hero-left-inner{max-width:none;}
+    .hero-right{order:2; min-height:220px;}
+    .site-nav .navbar-brand{font-size:.95rem; max-width:210px;}
+    .site-nav .brand-logo{height:40px;}
+    .site-nav{padding:.9rem 0; padding-top:calc(1.5rem + env(safe-area-inset-top, 0px));}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== Navigation ===== -->
+<nav class="navbar navbar-expand-lg site-nav">
+  <div class="container">
+    <a class="navbar-brand" href="#top">
+      <img src="images/logo.svg" alt="Kingston Sudanese Youth Club logo" class="brand-logo">
+      Kingston Sudanese Youth Club
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#programs">Programs</a></li>
+        <li class="nav-item"><a class="nav-link" href="#social">Community</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        <li class="nav-item ms-lg-2 mt-2 mt-lg-0"><a class="btn-jersey" href="#contact">Get Involved</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== Hero ===== -->
+<header class="hero" id="top">
+  <div class="hero-split">
+    <div class="hero-left">
+      <div class="hero-left-inner">
+        <h1>Football Brings   <span>Us Together</span></h1>
+        <p class="lead">Kingston Sudanese Youth Club is a grassroots community organisation using football to build confidence, teamwork and opportunity for children free of charge, week after week.</p>
+        <a href="#programs" class="btn-jersey">What We Do</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <img src="images/hero-pitch.jpg" alt="Children playing football on a community pitch">
+    </div>
+  </div>
+  <div class="scoreboard w-100">
+    <div class="container">
+      <div class="row g-0">
+        <div class="col-6 col-md-3 stat">
+          <div class="num">80</div>
+          <div class="lbl">Children Supported</div>
+        </div>
+        <div class="col-6 col-md-3 stat">
+          <div class="num">4</div>
+          <div class="lbl">Years Running</div>
+        </div>
+        <div class="col-6 col-md-3 stat">
+          <div class="num">100%</div>
+          <div class="lbl">Community-Led</div>
+        </div>
+        <div class="col-6 col-md-3 stat">
+          <div class="num">Free</div>
+          <div class="lbl">Always, No Cost</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ===== About ===== -->
+<section id="about">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-5">
+        <div class="about-photo">
+          <img src="images/about-team.jpg" alt="Kingston Sudanese Youth Club coaches and children on the pitch">
+          <div class="badge-founded"><span class="yr">2016</span><span class="txt">Founded</span></div>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <span class="section-tag">About Us</span>
+        <h2 class="section-title">Football Brings Us Together</h2>
+        <p class="section-lead mb-4">Kingston Sudanese Youth Club provides football for local youth to promote integration and education throughout football.</p>
+
+        <div class="value-row">
+          <i class="bi bi-people-fill"></i>
+          <div>
+            <h3>Open to every child</h3>
+            <p>No fees, no trials — every session is free and welcomes all abilities.</p>
+          </div>
+        </div>
+        <div class="value-row">
+          <i class="bi bi-shield-check"></i>
+          <div>
+            <h3>Safe, trained coaching</h3>
+            <p>All coaches are trained, vetted volunteers focused on wellbeing first.</p>
+          </div>
+        </div>
+        <div class="value-row">
+          <i class="bi bi-heart-fill"></i>
+          <div>
+            <h3>Built by the community</h3>
+            <p>Run for and with local families, on local pitches, for the long term.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Programs / Gallery ===== -->
+<section id="programs">
+  <div class="container">
+    <div class="text-center mx-auto mb-5" style="max-width:640px;">
+      <h2 class="section-title">What we do</h2>
+      <p class="section-lead mx-auto">Four ways we support children, young people and families in our community.</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-sm-6 col-lg-3">
+        <div class="prog-card">
+          <div class="prog-photo">
+            <img src="images/program-weekend.jpg" alt="Football coaching session">
+          </div>
+          <div class="prog-body">
+            <h3>Football Coaching</h3>
+            <p>Regular sessions that bring the community together through football — building fitness, friendship and teamwork.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="prog-card">
+          <div class="prog-photo">
+            <img src="images/program-girls.jpg" alt="Refugee support session">
+          </div>
+          <div class="prog-body">
+            <h3>Refugee Support</h3>
+            <p>Advice and guidance to help refugees settle in and integrate confidently into the local community.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="prog-card">
+          <div class="prog-photo">
+            <img src="images/program-camps.jpg" alt="English and IT skills class">
+          </div>
+          <div class="prog-body">
+            <h3>English &amp; IT Skills</h3>
+            <p>Basic English and IT classes for young people aged 14–24, building skills for school, work and everyday life.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="prog-card">
+          <div class="prog-photo">
+            <img src="images/program-mentorship.jpg" alt="Job support and CV workshop">
+          </div>
+          <div class="prog-body">
+            <h3>Job Support</h3>
+            <p>Hands-on help with CVs, job applications and finding volunteering opportunities to build experience.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Social / Community ===== -->
+<section id="social">
+  <div class="container">
+    <span class="section-tag" style="color:#fff;">Stay Close</span>
+    <h2 class="section-title">Follow our journey</h2>
+    <p>Updates on our programmes, events and stories from across the community — follow along on social media.</p>
+    <div class="social-links">
+      <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+      <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Contact ===== -->
+<section id="contact">
+  <div class="container">
+    <div class="text-center mx-auto mb-5" style="max-width:640px;">
+      <span class="section-tag">Get In Touch</span>
+      <h2 class="section-title">Contact us</h2>
+      <p class="section-lead mx-auto">Want to volunteer, join one of our programmes, or simply find out more about what we do? Send us a message and we'll get back to you.</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="contact-info-card">
+          <div class="info-line">
+            <i class="bi bi-geo-alt-fill"></i>
+            <div>
+              <strong>Address</strong>
+              <span>Searchlight Community Centre,<br>Hammerton Way, New Malden, KT3 3DU</span>
+            </div>
+          </div>
+          <div class="info-line">
+            <i class="bi bi-telephone-fill"></i>
+            <div>
+              <strong>Phone</strong>
+              <span><img src="images/phone.png" alt="Club mobile number" style="height:16px;width:auto;vertical-align:middle;"></span>
+            </div>
+          </div>
+          <div class="info-line">
+            <i class="bi bi-envelope-fill"></i>
+            <div>
+              <strong>Email</strong>
+              <span>hello@kingstonsudaneseyouthclub.org</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <div class="mb-3">
+            <label class="form-label" for="name">Full name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Your name" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="message">Message</label>
+            <textarea class="form-control" id="message" name="message" rows="4" placeholder="How would you like to get involved?" required></textarea>
+          </div>
+          <input type="hidden" name="_subject" value="New enquiry from Kingston Sudanese Youth Club website">
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+          <button type="submit" class="btn-jersey w-100">Send Message</button>
+        </form>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="map-wrap">
+          <iframe
+            src="https://www.google.com/maps?q=Searchlight%20Community%20Centre%2C%20Hammerton%20Way%2C%20New%20Malden%2C%20KT3%203DU&output=embed"
+            allowfullscreen loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Kingston Sudanese Youth Club location map">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer>
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="brand"><i class="bi bi-dribbble text-warning"></i> Kingston Sudanese Youth Club</div>
+    <div class="d-flex gap-3">
+      <a href="#about">About</a>
+      <a href="#programs">Programs</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div style="font-size:.85rem;">&copy; 2026 Kingston Sudanese Youth Club. All rights reserved.</div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
